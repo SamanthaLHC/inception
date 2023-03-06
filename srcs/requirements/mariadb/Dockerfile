@@ -10,7 +10,7 @@ COPY mariadb.conf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY launch_mdb.sh /launch_mdb.sh
 
-COPY ../../requirements/../../srcs/.env /.env
+# COPY ../../requirements/../../srcs/.env /.env
 
 ENTRYPOINT ["bash", "/launch_mdb.sh"]
 
