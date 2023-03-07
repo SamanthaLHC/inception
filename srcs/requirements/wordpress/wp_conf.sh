@@ -20,9 +20,9 @@ if [ ! -a wp-config.php ]; then
 		--path='/var/www/wordpress' 
 
 	# creer un second utilisateur
-	wp user create --allow-root \
-		--user-login=$WP_USER \
-		--user-email=$WP_USER_EMAIL \
+	wp user create  \
+		$WP_USER \
+		$WP_USER_EMAIL \
 		--role=$USER_ROLE \
 		--user_pass=$WP_USER_PASSWORD \
 		--admin_email=$WP_USER_EMAIL \

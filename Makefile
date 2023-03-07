@@ -2,10 +2,12 @@
 
 SRC_PATH = ./srcs/docker-compose.yml
 
-all: start
-	# creer des directories pour les volumes
-	#add les droits
-	#  rule start
+all: dirs build start
+
+dirs:
+	mkdir -p ${HOME}/data/mariadb
+	mkdir -p ${HOME}/data/wordpress
+
 
 build:
 	docker-compose -f $(SRC_PATH) build
@@ -24,10 +26,12 @@ info:
 
 list:
 	docker-compose -f $(SRC_PATH) ps
-	# docker-compose -f $(SRC_PATH) ls
 
 clean: stop
 	docker system prune -f -a --volumes
-	# rm les dir des volumes
+	sudo rm -rf ${HOME}/data/mariadb
+	sudo rm -rf ${HOME}/data/wordpress
 
-.PHONY: all build start stop restart info list clean
+re: clean all
+
+.PHONY: all dirs build start stop restart info list clean re
