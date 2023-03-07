@@ -56,6 +56,23 @@ services:
 
 volumes:
 
+  wordpress:
+    driver: local
+    driver_opts:
+    type: 'none'
+    o: 'bind'
+    # device: '/home/sle-huec/data/wordpress'
+    device: '/home/sam/data/mariadb'
+
+  mariadb:
+    driver: local
+    driver_opts:
+    type: 'none'
+    o: 'bind'
+    # device: '/home/sle-huec/data/mariadb'
+    device: '/home/sam/data/mariadb'
+
 
 networks:
-
+  inception:
+    driver: bridge
