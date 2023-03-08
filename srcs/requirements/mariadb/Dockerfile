@@ -1,10 +1,10 @@
 FROM debian:buster
 
-RUN apt update -y && apt -y install mariadb-server mariadb-client
+RUN apt update -y && apt -y install mariadb-server
 
-# RUN mkdir -p /var/run/mysqld
+# RUN sudo mkdir -p /var/run/mysqld
 # 
-# RUN chown -R mysql:root /run/mysqld && chown -R mysql:mysql /var/lib/mysql
+# RUN sudo chown -R mysql:root /run/mysqld && chown -R mysql:mysql /var/lib/mysql
 
 COPY mariadb.conf /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -12,6 +12,6 @@ COPY launch_mdb.sh /launch_mdb.sh
 
 # COPY ../../requirements/../../srcs/.env /.env
 
-CMD ["bash", "/launch_mdb.sh"]
+ENTRYPOINT ["bash", "/launch_mdb.sh"]
 
 EXPOSE 3306

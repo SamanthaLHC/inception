@@ -28,9 +28,9 @@ list:
 	docker-compose -f $(SRC_PATH) ps
 
 clean: stop
-	docker system prune -f -a --volumes
 	sudo rm -rf ${HOME}/data/mariadb
 	sudo rm -rf ${HOME}/data/wordpress
+	docker system prune -f -a --volumes
 
 re: clean all
 
