@@ -1,8 +1,12 @@
 #!/bin/bash
 
-sleep 10
 
 if [ ! -a wp-config.php ]; then
+	sleep 10
+
+	wp core download --allow-root \
+					 --path="/var/www/wordpress/"
+
 	wp config create --allow-root \
 		--dbname=$SQL_DATABASE \
 		--dbuser=$SQL_USER \
@@ -10,6 +14,7 @@ if [ ! -a wp-config.php ]; then
 		--dbhost=mariadb:3306 \
 		--path='/var/www/wordpress'
 
+	sleep 10
 	# configurer la page automatiquement
 	wp core install --allow-root \
 		--url=$WP_SITE \
@@ -26,13 +31,12 @@ if [ ! -a wp-config.php ]; then
 		--role=author \
 		--user_pass=$WP_USER_PASSWORD \
 		# --admin_email=$WP_USER_EMAIL \
-		--path='/var/www/wordpress' 
-
+		--path='/var/www/wordpress'
 fi
 
 if [ ! -d /run/php ]; then
-	mkdir -p /run/php
+	mkdir -p /run/php	
 fi
 
 # run php-fpm:
-/usr/sbin/php-fpm7.3 -F
+exec php-fpm7.3 -F

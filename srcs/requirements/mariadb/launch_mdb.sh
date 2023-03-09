@@ -1,17 +1,19 @@
 #!/bin/bash
 
-service mysql start
+if [ ! -f "./file_flag_mdb_done" ]; then 
+	mkdir -p /run/mysqld
+	chown -R mysql:mysql /run/mysqld
 
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
+	service mysql start
 
-mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"
+	mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
+	mysql -uroot "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"
+	mysql -uroot "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
+	mysql -uroot "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
+	mysql -uroot "FLUSH PRIVILEGES;"
 
-mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';"
+	mysqladmin -uroot -p$SQL_ROOT_PASSWORD shutdown
+	touch file_flag_mdb_done
+fi
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
-
-mysql -e "FLUSH PRIVILEGES;"
-
-mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
-
-exec mysqld_safe
+exec mysqld

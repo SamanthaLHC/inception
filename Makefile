@@ -30,6 +30,10 @@ list:
 clean: stop
 	sudo rm -rf ${HOME}/data/mariadb
 	sudo rm -rf ${HOME}/data/wordpress
+	docker volume rm srcs_wordpress
+	docker volume rm srcs_mariadb
+	sudo rm -rf /var/www/wordpress
+	sudo rm -rf /var/lib/mysql
 	docker system prune -f -a --volumes
 
 re: clean all

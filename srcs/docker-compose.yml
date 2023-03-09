@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3'
 
 services:
 
@@ -50,18 +50,11 @@ services:
       - wordpress:/var/www/wordpress 
     depends_on:
       - mariadb
-    restart: on-failure
+    restart: on-failure 
     expose:
       - "9000"
 
 volumes:
-
-  wordpress:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '${HOME}/data/wordpress'
 
   mariadb:
     driver: local
@@ -69,8 +62,14 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '${HOME}/data/mariadb'
+  
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${HOME}/data/wordpress'
 
 networks:
-
   inception:
     driver: bridge
