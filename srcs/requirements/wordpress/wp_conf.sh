@@ -2,8 +2,8 @@
 
 
 if [ ! -a wp-config.php ]; then
-	sleep 10
 
+	sleep 10
 	wp core download --allow-root \
 					 --path="/var/www/wordpress/"
 
@@ -30,7 +30,7 @@ if [ ! -a wp-config.php ]; then
 		"$WP_USER_EMAIL" \
 		--role=author \
 		--user_pass=$WP_USER_PASSWORD \
-		# --admin_email=$WP_USER_EMAIL \
+		# --admin_email=$WP_USER_EMAIL
 		--path='/var/www/wordpress'
 fi
 

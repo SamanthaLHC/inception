@@ -1,11 +1,8 @@
 #!/bin/bash
 set -x
 
-if [ ! -f "/var/lib/mysql/file_flag_mdb_done" ]; then 
-	chown -R mysql:mysql /var/lib/mysql
-	mkdir -p /var/run/mysqld
-	chown -R mysql:mysql /var/run/mysqld
-	
+if [ ! -f "/var/lib/mysql/file_flag_mdb_done" ]; then
+
 	service mysql start
 
 	# Wait for service to be ready
@@ -24,7 +21,6 @@ GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED 
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';
 FLUSH PRIVILEGES;
 EOF
-	
 	sleep 5
 	mysqladmin -uroot -p$SQL_ROOT_PASSWORD shutdown
 	touch /var/lib/mysql/file_flag_mdb_done
