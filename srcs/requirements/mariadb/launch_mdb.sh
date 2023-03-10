@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+# set -x
 
 if [ ! -f "/var/lib/mysql/file_flag_mdb_done" ]; then
 
@@ -26,5 +26,5 @@ EOF
 	touch /var/lib/mysql/file_flag_mdb_done
 fi
 
-set +x
+# set +x
 exec mysqld
