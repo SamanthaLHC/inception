@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -x
+set -x
 if [ ! -a wp-config.php ]; then
 
 	sleep 10

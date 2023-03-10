@@ -8,7 +8,6 @@ dirs:
 	mkdir -p ${HOME}/data/mariadb
 	mkdir -p ${HOME}/data/wordpress
 
-
 build:
 	docker-compose -f $(SRC_PATH) build
 
@@ -42,4 +41,4 @@ clean: stop clean-data
 
 re: clean all
 
-.PHONY: all dirs build start stop restart info list clean re
+.PHONY: all dirs build start stop restart info list clean-data clean re

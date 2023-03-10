@@ -7,7 +7,7 @@ if [ ! -f "/var/lib/mysql/file_flag_mdb_done" ]; then
 
 	# Wait for service to be ready
 	echo -n "Waiting for service to be fully started"
-	sleep 1 # Sleep at least once
+	sleep 3 # Sleep at least tree
 	while [ ! -e /var/run/mysqld/mysqld.sock ]; do 
 		echo -n .
 		sleep 1
