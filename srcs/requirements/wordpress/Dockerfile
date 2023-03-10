@@ -18,6 +18,9 @@ RUN chmod +x wp-cli.phar
 
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+# RUN php wp-cli.phar --info
+# RUN cp /var/www/wordpress/wp-config-sample.php
+
 COPY wp_conf.sh /wp_conf.sh
 
 ENTRYPOINT [ "bash", "/wp_conf.sh" ]

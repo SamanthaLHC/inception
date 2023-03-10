@@ -1,10 +1,11 @@
 #!/bin/bash
 
-set -x
-if [ ! -a wp-config.php ]; then
+# set -x
+if [ ! -f /var/www/wordpress/wp-config.php ]; then
 
 	sleep 10
 
+	# wp core download --path='/var/www/wordpress'	
 	wp config create --allow-root \
 		--dbname=$SQL_DATABASE \
 		--dbuser=$SQL_USER \
@@ -28,7 +29,6 @@ if [ ! -a wp-config.php ]; then
 		"$WP_USER_EMAIL" \
 		--role=author \
 		--user_pass=$WP_USER_PASSWORD \
-		# --admin_email=$WP_USER_EMAIL
 		--path='/var/www/wordpress'
 else
 	echo "wp-config php DONE" 
@@ -41,4 +41,4 @@ fi
 # run php-fpm:
 exec php-fpm7.3 -F
 
-set +x
+# set +x
