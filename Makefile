@@ -35,9 +35,6 @@ infos:
 	docker image ls;
 	echo "DOCKER NETWORK INFOS";
 	docker network ls;
-	echo "ERRORS LOGS";
-	cat 2>/dev/null
-
 
 clean-data:
 	sudo rm -rf ${HOME}/data/mariadb
@@ -48,12 +45,8 @@ clean: stop clean-data
 	docker volume rm srcs_mariadb
 	docker system prune -f -a --volumes
 
-fclean: 
-	docker stop $(docker ps -qa)
-	docker rm $(docker ps -qa)
-	docker rmi -f $(docker image -qa)
-	docker volume rm $(docker volume ls -q)
-	docker network rm $(docker network ls -q) 2>/dev/null
+# fclean: 
+# 		./fclean.sh
 
 re: clean all
 
