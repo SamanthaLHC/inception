@@ -9,23 +9,23 @@ dirs:
 	mkdir -p ${HOME}/data/wordpress
 
 build:
-	docker-compose -f $(SRC_PATH) build
+	docker compose -f $(SRC_PATH) build
 
 start: build
-	docker-compose -f $(SRC_PATH) up
+	docker compose -f $(SRC_PATH) up
 
 stop:
-	docker-compose -f $(SRC_PATH) down
+	docker compose -f $(SRC_PATH) down
 
 restart:
-	docker-compose -f $(SRC_PATH) restart
+	docker compose -f $(SRC_PATH) restart
 
 infos:
 	# echo "data in /var/lib/mysql"
 	# ls -la /var/lib/mysql/
 	# ls -la /var/run/mysqld
 	echo "INFOS ABOUT CONTAINERS NAMES, STATES AND PORTS:";
-	docker-compose -f $(SRC_PATH) ps;
+	docker compose -f $(SRC_PATH) ps;
 	echo "VOLUMES NAMES:";
 	docker volume ls;
 	echo "INFOS ABOUT VOLUMES CONFIG:";
